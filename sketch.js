@@ -34,6 +34,7 @@ function draw() {
 
   	ground.display();
 	paperball.display();
+	
 
  	drawSprites();
  

@@ -3,47 +3,41 @@ const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
 
-var engine, world;
-
-function preload(){
-	
-}
-
+var engine, world,dustbin,paper;
 function setup() {
-	var canvas=createCanvas(800, 700);
-	engine = Engine.create();
-    world = engine.world;
+  createCanvas(800, 400);
+  rectMode(CENTER);
 
-	ground = new Ground(600,height,1500,20);
-	
-	engine = Engine.create();
-	world = engine.world;
 
-	//Create the Bodies Here.
-	paperball=new Paperball(50,60)
+  engine = Engine.create();
+  world = engine.world;
+  Engine.run(engine);
 
-	Engine.run(engine);
-  
+  dustbin = new DustBin(720, 390, 100, 10);
+  paper = new Paper(100, 300, 10);
+  ground = Bodies.rectangle(width / 2, 400, width, 10,
+  {
+    isStatic: true
+  });
+  World.add(world, ground);
 }
-
 
 function draw() {
-	Engine.update(engine);
-  	rectMode(CENTER);
-  	background(0);
+     background("black");
+       rectMode(CENTER);
+    background(0);
 
-  	ground.display();
-	paperball.display();
-	
+    dustbin.display();
+    paper.display();
+    }
 
- 	drawSprites();
- 
-}
+
+
 function keyPressed(){
-	if(keycode===UP_ARROW){ 
-		Matter.Body.applyForce(paperObject.body,paperObject.Body.position,{x:85,y:-85});
-	}
+  if (keyCode === UP_ARROW) {
+    Matter.Body.applyForce(paper.body, paper.body.position, {
+      x: 12,
+      y: -13
+    });
+  }
 }
-
-
-
